@@ -88,13 +88,23 @@ class _DigitalClockState extends State<DigitalClock> {
     // final colors = Theme.of(context).brightness == Brightness.light
     //     ? _lightTheme
     //     : _darkTheme;
+
+    // Time
     final hour =
         DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
     final minute = DateFormat('mm').format(_dateTime);
     final seconds = DateFormat('ss').format(_dateTime);
     final height = MediaQuery.of(context).size.height;
+
+    // Date
+    final month = DateFormat('MM').format(_dateTime);
+    final day = DateFormat('dd').format(_dateTime);
+    final year = DateFormat('yyyy').format(_dateTime);
+
+    // Sizes
     final width = MediaQuery.of(context).size.width;
-    final numberWidth = width * 0.10;
+    final timeNumberWidth = width * 0.10;
+    final dateNumberWidth = width * 0.05;
 
     return Container(
       height: height,
@@ -109,29 +119,29 @@ class _DigitalClockState extends State<DigitalClock> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 ClockNumber(
-                  width: numberWidth,
+                  width: timeNumberWidth,
                   number: int.parse(hour[0]),
                 ),
                 ClockNumber(
-                  width: numberWidth,
+                  width: timeNumberWidth,
                   number: int.parse(hour[1]),
                 ),
-                SizedBox(width: 32),
+                SizedBox(width: 16),
                 ClockNumber(
-                  width: width,
+                  width: timeNumberWidth,
                   number: int.parse(minute[0]),
                 ),
                 ClockNumber(
-                  width: numberWidth,
+                  width: timeNumberWidth,
                   number: int.parse(minute[1]),
                 ),
                 SizedBox(width: 32),
                 ClockNumber(
-                  width: numberWidth,
+                  width: timeNumberWidth,
                   number: int.parse(seconds[0]),
                 ),
                 ClockNumber(
-                  width: numberWidth,
+                  width: timeNumberWidth,
                   number: int.parse(seconds[1]),
                 ),
               ],
@@ -142,7 +152,40 @@ class _DigitalClockState extends State<DigitalClock> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                // TODO: Add dynamic date
+                ClockNumber(
+                  width: dateNumberWidth,
+                  number: int.parse(month[0]),
+                ),
+                ClockNumber(
+                  width: dateNumberWidth,
+                  number: int.parse(month[1]),
+                ),
+                SizedBox(width: 32),
+                ClockNumber(
+                  width: dateNumberWidth,
+                  number: int.parse(day[0]),
+                ),
+                ClockNumber(
+                  width: dateNumberWidth,
+                  number: int.parse(day[1]),
+                ),
+                SizedBox(width: 32),
+                ClockNumber(
+                  width: dateNumberWidth,
+                  number: int.parse(year[0]),
+                ),
+                ClockNumber(
+                  width: dateNumberWidth,
+                  number: int.parse(year[1]),
+                ),
+                ClockNumber(
+                  width: dateNumberWidth,
+                  number: int.parse(year[2]),
+                ),
+                ClockNumber(
+                  width: dateNumberWidth,
+                  number: int.parse(year[3]),
+                ),
               ],
             ),
           ),
