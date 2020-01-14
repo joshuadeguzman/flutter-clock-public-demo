@@ -94,6 +94,7 @@ class _DigitalClockState extends State<DigitalClock> {
     final seconds = DateFormat('ss').format(_dateTime);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final numberWidth = width * 0.10;
 
     return Container(
       height: height,
@@ -108,29 +109,29 @@ class _DigitalClockState extends State<DigitalClock> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 ClockNumber(
-                  rootWidth: width,
+                  width: numberWidth,
                   number: int.parse(hour[0]),
                 ),
                 ClockNumber(
-                  rootWidth: width,
+                  width: numberWidth,
                   number: int.parse(hour[1]),
                 ),
                 SizedBox(width: 32),
                 ClockNumber(
-                  rootWidth: width,
+                  width: width,
                   number: int.parse(minute[0]),
                 ),
                 ClockNumber(
-                  rootWidth: width,
+                  width: numberWidth,
                   number: int.parse(minute[1]),
                 ),
                 SizedBox(width: 32),
                 ClockNumber(
-                  rootWidth: width,
+                  width: numberWidth,
                   number: int.parse(seconds[0]),
                 ),
                 ClockNumber(
-                  rootWidth: width,
+                  width: numberWidth,
                   number: int.parse(seconds[1]),
                 ),
               ],

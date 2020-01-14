@@ -22,12 +22,12 @@ enum ClockNumberEnum {
 enum ClockNumberAnimationEnum { IN, OUT, STOP }
 
 class ClockNumber extends StatefulWidget {
-  final double rootWidth;
+  final double width;
   final int number;
 
   const ClockNumber({
     Key key,
-    @required this.rootWidth,
+    @required this.width,
     @required this.number,
   }) : super(key: key);
 
@@ -38,16 +38,15 @@ class ClockNumber extends StatefulWidget {
 }
 
 class ClockNumberState extends State<ClockNumber> {
-  double get _width => widget.rootWidth;
+  double get _width => widget.width;
   int get _number => widget.number;
   ClockNumberAnimationEnum clockNumberAnimationEnum =
       ClockNumberAnimationEnum.IN;
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
-      width: _width * 0.10,
+      width: _width,
       child: FlareActor(
         _getFlareFile(_getEnumNumberEquivalent(_number)),
         alignment: Alignment.center,
