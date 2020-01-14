@@ -15,7 +15,7 @@ enum _Element {
 }
 
 final _lightTheme = {
-  _Element.background: Color(0xFF81B3FE),
+  _Element.background: Color(0xFF3e206d),
   _Element.text: Colors.white,
   _Element.shadow: Colors.black,
 };
@@ -23,7 +23,7 @@ final _lightTheme = {
 final _darkTheme = {
   _Element.background: Color(0xFF2B173B),
   _Element.text: Colors.white,
-  _Element.shadow: Color(0xFF2B173B),
+  _Element.shadow: Colors.black,
 };
 
 class DigitalClock extends StatefulWidget {
@@ -83,11 +83,9 @@ class _DigitalClockState extends State<DigitalClock> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = _darkTheme;
-    // TODO: Add dynamic theme
-    // final colors = Theme.of(context).brightness == Brightness.light
-    //     ? _lightTheme
-    //     : _darkTheme;
+    final colors = Theme.of(context).brightness == Brightness.light
+        ? _lightTheme
+        : _darkTheme;
 
     // Time
     final hour =
