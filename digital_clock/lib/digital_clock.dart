@@ -109,26 +109,24 @@ class _DigitalClockState extends State<DigitalClock> {
     final hour =
         DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
     final minute = DateFormat('mm').format(_dateTime);
-    final fontSize = MediaQuery.of(context).size.width / 3.5;
-    final offset = -fontSize / 7;
-    final defaultStyle = TextStyle(
-      color: colors[_Element.text],
-      fontFamily: 'PressStart2P',
-      fontSize: fontSize,
-      shadows: [
-        Shadow(
-          blurRadius: 0,
-          color: colors[_Element.shadow],
-          offset: Offset(10, 0),
-        ),
-      ],
-    );
-
+    final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
     Widget _buildClockNumber(String flareFile, String flareAction) {
       return Container(
-        width: width * 0.10,
+        width: width * 0.125,
+        child: FlareActor(
+          flareFile,
+          alignment: Alignment.center,
+          fit: BoxFit.contain,
+          animation: flareAction,
+        ),
+      );
+    }
+
+    Widget _buildDateNumber(String flareFile, String flareAction) {
+      return Container(
+        width: width * 0.05,
         child: FlareActor(
           flareFile,
           alignment: Alignment.center,
@@ -139,23 +137,47 @@ class _DigitalClockState extends State<DigitalClock> {
     }
 
     return Container(
-      // TODO: Only for demo, not recommended. Clock to be submitted should maintain 5:3 ratio
-      height: MediaQuery.of(context).size.height,
+      height: height,
       width: width,
       color: colors[_Element.background],
-      child: Row(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          _buildClockNumber("assets/clock_0.flr", _Animation.anim_in),
-          _buildClockNumber("assets/clock_1.flr", _Animation.anim_in),
-          _buildClockNumber("assets/clock_2.flr", _Animation.anim_in),
-          _buildClockNumber("assets/clock_3.flr", _Animation.anim_in),
-          _buildClockNumber("assets/clock_4.flr", _Animation.anim_in),
-          _buildClockNumber("assets/clock_5.flr", _Animation.anim_in),
-          _buildClockNumber("assets/clock_6.flr", _Animation.anim_in),
-          _buildClockNumber("assets/clock_7.flr", _Animation.anim_in),
-          _buildClockNumber("assets/clock_8.flr", _Animation.anim_in),
-          _buildClockNumber("assets/clock_9.flr", _Animation.anim_in),
+          Container(
+            height: height * 0.50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _buildClockNumber("assets/clock_0.flr", _Animation.anim_in),
+                _buildClockNumber("assets/clock_1.flr", _Animation.anim_in),
+                SizedBox(width: 32),
+                _buildClockNumber("assets/clock_2.flr", _Animation.anim_in),
+                _buildClockNumber("assets/clock_3.flr", _Animation.anim_in),
+                SizedBox(width: 32),
+                _buildClockNumber("assets/clock_4.flr", _Animation.anim_in),
+                _buildClockNumber("assets/clock_5.flr", _Animation.anim_in),
+              ],
+            ),
+          ),
+          // TODO: Make this dynamic
+          Container(
+            height: 30,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _buildDateNumber("assets/clock_0.flr", _Animation.anim_in),
+                _buildDateNumber("assets/clock_1.flr", _Animation.anim_in),
+                SizedBox(width: 32),
+                _buildDateNumber("assets/clock_1.flr", _Animation.anim_in),
+                _buildDateNumber("assets/clock_4.flr", _Animation.anim_in),
+                SizedBox(width: 32),
+                _buildDateNumber("assets/clock_2.flr", _Animation.anim_in),
+                _buildDateNumber("assets/clock_0.flr", _Animation.anim_in),
+                _buildDateNumber("assets/clock_2.flr", _Animation.anim_in),
+                _buildDateNumber("assets/clock_0.flr", _Animation.anim_in),
+              ],
+            ),
+          ),
         ],
       ),
     );
