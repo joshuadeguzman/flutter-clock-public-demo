@@ -47,7 +47,7 @@ class ClockNumberState extends State<ClockNumber> {
   Widget build(BuildContext context) {
 
     return Container(
-      width: _width * 0.125,
+      width: _width * 0.10,
       child: FlareActor(
         _getFlareFile(_getEnumNumberEquivalent(_number)),
         alignment: Alignment.center,
