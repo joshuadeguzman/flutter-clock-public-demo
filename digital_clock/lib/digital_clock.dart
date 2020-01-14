@@ -4,6 +4,7 @@
 
 import 'dart:async';
 
+import 'package:digital_clock/clock_number.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter/material.dart';
@@ -112,18 +113,6 @@ class _DigitalClockState extends State<DigitalClock> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    Widget _buildClockNumber(String flareFile, String flareAction) {
-      return Container(
-        width: width * 0.125,
-        child: FlareActor(
-          flareFile,
-          alignment: Alignment.center,
-          fit: BoxFit.contain,
-          animation: flareAction,
-        ),
-      );
-    }
-
     Widget _buildDateNumber(String flareFile, String flareAction) {
       return Container(
         width: width * 0.05,
@@ -148,14 +137,23 @@ class _DigitalClockState extends State<DigitalClock> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                _buildClockNumber("assets/clock_0.flr", _Animation.anim_in),
-                _buildClockNumber("assets/clock_1.flr", _Animation.anim_in),
+                ClockNumber(
+                  rootWidth: width,
+                  number: int.parse(hour[0]),
+                ),
+                ClockNumber(
+                  rootWidth: width,
+                  number: int.parse(hour[1]),
+                ),
                 SizedBox(width: 32),
-                _buildClockNumber("assets/clock_2.flr", _Animation.anim_in),
-                _buildClockNumber("assets/clock_3.flr", _Animation.anim_in),
-                SizedBox(width: 32),
-                _buildClockNumber("assets/clock_4.flr", _Animation.anim_in),
-                _buildClockNumber("assets/clock_5.flr", _Animation.anim_in),
+                ClockNumber(
+                  rootWidth: width,
+                  number: int.parse(minute[0]),
+                ),
+                ClockNumber(
+                  rootWidth: width,
+                  number: int.parse(minute[1]),
+                ),
               ],
             ),
           ),
