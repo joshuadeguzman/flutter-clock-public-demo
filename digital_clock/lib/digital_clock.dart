@@ -4,6 +4,7 @@
 
 import 'dart:async';
 
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -14,6 +15,12 @@ enum _Element {
   shadow,
 }
 
+class _Animation {
+  static final anim_in = "in";
+  static final anim_out = "out";
+  static final anim_stop = "stop";
+}
+
 final _lightTheme = {
   _Element.background: Color(0xFF81B3FE),
   _Element.text: Colors.white,
@@ -21,9 +28,9 @@ final _lightTheme = {
 };
 
 final _darkTheme = {
-  _Element.background: Colors.black,
+  _Element.background: Color(0xFF2B173B),
   _Element.text: Colors.white,
-  _Element.shadow: Color(0xFF174EA6),
+  _Element.shadow: Color(0xFF2B173B),
 };
 
 /// A basic digital clock.
@@ -95,9 +102,10 @@ class _DigitalClockState extends State<DigitalClock> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).brightness == Brightness.light
-        ? _lightTheme
-        : _darkTheme;
+    final colors = _darkTheme;
+    // final colors = Theme.of(context).brightness == Brightness.light
+    //     ? _lightTheme
+    //     : _darkTheme;
     final hour =
         DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
     final minute = DateFormat('mm').format(_dateTime);
@@ -116,18 +124,39 @@ class _DigitalClockState extends State<DigitalClock> {
       ],
     );
 
-    return Container(
-      color: colors[_Element.background],
-      child: Center(
-        child: DefaultTextStyle(
-          style: defaultStyle,
-          child: Stack(
-            children: <Widget>[
-              Positioned(left: offset, top: 0, child: Text(hour)),
-              Positioned(right: offset, bottom: offset, child: Text(minute)),
-            ],
-          ),
+    final width = MediaQuery.of(context).size.width;
+
+    Widget _buildClockNumber(String flareFile, String flareAction) {
+      return Container(
+        width: width * 0.10,
+        child: FlareActor(
+          flareFile,
+          alignment: Alignment.center,
+          fit: BoxFit.contain,
+          animation: flareAction,
         ),
+      );
+    }
+
+    return Container(
+      // TODO: Only for demo, not recommended. Clock to be submitted should maintain 5:3 ratio
+      height: MediaQuery.of(context).size.height,
+      width: width,
+      color: colors[_Element.background],
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _buildClockNumber("assets/clock_0.flr", _Animation.anim_in),
+          _buildClockNumber("assets/clock_1.flr", _Animation.anim_in),
+          _buildClockNumber("assets/clock_2.flr", _Animation.anim_in),
+          _buildClockNumber("assets/clock_3.flr", _Animation.anim_in),
+          _buildClockNumber("assets/clock_4.flr", _Animation.anim_in),
+          _buildClockNumber("assets/clock_5.flr", _Animation.anim_in),
+          _buildClockNumber("assets/clock_6.flr", _Animation.anim_in),
+          _buildClockNumber("assets/clock_7.flr", _Animation.anim_in),
+          _buildClockNumber("assets/clock_8.flr", _Animation.anim_in),
+          _buildClockNumber("assets/clock_9.flr", _Animation.anim_in),
+        ],
       ),
     );
   }

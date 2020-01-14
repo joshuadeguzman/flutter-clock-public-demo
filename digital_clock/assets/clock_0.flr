@@ -35,7 +35,7 @@
 					"opacity": 1,
 					"isCollapsed": false,
 					"clips": [],
-					"isVisible": true,
+					"isVisible": false,
 					"blendMode": 3,
 					"drawOrder": 1,
 					"transformAffectsStroke": false,
@@ -748,7 +748,7 @@
 			],
 			"animations": [
 				{
-					"name": "ff_00_out",
+					"name": "out",
 					"fps": 60,
 					"duration": 0.3333333333333333,
 					"isLooping": false,
@@ -1020,10 +1020,10 @@
 					"type": "animation"
 				},
 				{
-					"name": "ff_00_in",
+					"name": "in",
 					"fps": 60,
 					"duration": 1.1333333333333333,
-					"isLooping": true,
+					"isLooping": false,
 					"keyed": [
 						{
 							"component": 4,
@@ -1264,7 +1264,7 @@
 					"type": "animation"
 				},
 				{
-					"name": "ff_00_stop",
+					"name": "stop",
 					"fps": 60,
 					"duration": 60,
 					"isLooping": true,
